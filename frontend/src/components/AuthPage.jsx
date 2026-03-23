@@ -29,7 +29,7 @@ export default function AuthPage({ onLogin, initialIsLogin = false }) {
           >
              <span className="text-3xl">⚡</span>
           </div>
-          <h1 className="text-2xl font-bold font-orbitron text-white">CryptoPulse</h1>
+          <h1 className="text-2xl font-bold font-orbitron text-white">CoinTrackr</h1>
           <p className="text-sm text-white/50 mt-1">
             {isLogin ? 'Welcome back, trader.' : 'Join the pulse of the market.'}
           </p>

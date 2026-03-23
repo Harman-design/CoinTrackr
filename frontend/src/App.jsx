@@ -45,11 +45,11 @@ function SplashScreen() {
             <div className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-bounce" style={{ animationDelay: '0.3s' }} />
           </div>
           <p className="text-[#00f0ff] font-orbitron tracking-[0.3em] text-xs uppercase opacity-80 mt-2">
-            J.A.R.V.I.S. PROTOCOL ENABLING
+            Predicting Crypto Trends Through Social Intelligence
           </p>
         </div>
       </div>
-    </div>
+    </div>  
   )
 }
 
