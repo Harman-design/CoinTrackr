@@ -1,3 +1,4 @@
+//frontend/src/components/CoinSelector.jsx
 import { COINS, TREND_CONFIG } from '../data/coins'
 
 export default function CoinSelector({ selected, setSelected }) {

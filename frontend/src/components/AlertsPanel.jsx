@@ -1,7 +1,8 @@
+//frontend/src/components/AlertsPanel.jsx
 import { ALERT_STYLE } from '../data/coins'
 
 function AlertCard({ alert, index }) {
-  const style = ALERT_STYLE[alert.type]
+  const style = ALERT_STYLE[alert.type] || ALERT_STYLE["neutral"];
 
   return (
     <div
@@ -11,8 +12,6 @@ function AlertCard({ alert, index }) {
         animate-fade-in-up
       `}
       style={{
-        borderColor:  style.border.replace('border-[', '').replace(']', ''),
-        background:   style.bg.replace('bg-[', 'rgba(').replace(']', ')'),
         borderColor:  alert.type === 'bullish' ? 'rgba(0,255,136,0.33)'
                     : alert.type === 'bearish' ? 'rgba(255,51,102,0.33)'
                     : 'rgba(255,215,0,0.33)',

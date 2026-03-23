@@ -1,30 +1,103 @@
-import { useState, useEffect } from 'react'
-import { COINS, TREND_CONFIG } from '../data/coins'
-import { MetricCard, TrendStatusCard } from './MetricCard'
-import ChartsSection from './ChartsSection'
-import AlertsPanel from './AlertsPanel'
-import ExplanationBox from './ExplanationBox'
-import StatsBar from './StatsBar'
+//frontend/src/components/Dashboard.jsx
+import { useState, useEffect } from "react";
+import { TREND_CONFIG } from "../data/coins";
+import { MetricCard, TrendStatusCard } from "./MetricCard";
+import ChartsSection from "./ChartsSection";
+import AlertsPanel from "./AlertsPanel";
+import ExplanationBox from "./ExplanationBox";
+import StatsBar from "./StatsBar";
+
+import useCoinData from "../hooks/useCoinData";
 
 export default function Dashboard({ selectedCoin }) {
-  const coin = COINS[selectedCoin]
-  const cfg  = TREND_CONFIG[coin.trend]
+  // ✅ ALL HOOKS FIRST
+  const { data, loading } = useCoinData(selectedCoin);
 
-  // Key forces remount → re-runs animations on coin switch
-  const [renderKey, setRenderKey] = useState(selectedCoin)
-  useEffect(() => { setRenderKey(selectedCoin) }, [selectedCoin])
+  const [renderKey, setRenderKey] = useState(selectedCoin);
+
+  useEffect(() => {
+    setRenderKey(selectedCoin);
+  }, [selectedCoin]);
+
+  // ✅ AFTER hooks → conditions
+  if (loading) return <div>Loading...</div>;
+  if (!data) return <div>Error loading data</div>;
+
+  // 🔥 DERIVED DATA FROM BACKEND
+
+  const sentimentBase = data.sentiment;
+
+  const sentimentData = [
+    { name: "Positive", value: Math.round(sentimentBase * 100) },
+    { name: "Neutral", value: Math.round((1 - sentimentBase) * 60) },
+    { name: "Negative", value: Math.round((1 - sentimentBase) * 40) },
+  ];
+
+  const mentionData = Array.from({ length: 7 }, (_, i) => ({
+    t: `Day ${i + 1}`,
+    mentions: Math.round(data.growth * 1000 * (0.7 + Math.random() * 0.6)),
+    baseline: 500,
+  }));
+
+  const basePrice = 0.0001;
+
+  const priceHistory = Array.from({ length: 7 }, (_, i) => ({
+    t: `Day ${i + 1}`,
+    price: basePrice * (1 + data.pump_probability * (i / 10)),
+  }));
+
+  // ✅ BEFORE coin object
+  const rawSignal = data.signal?.toLowerCase();
+
+  const trend = rawSignal?.includes("bullish")
+    ? "bullish"
+    : rawSignal?.includes("bearish")
+      ? "bearish"
+      : "neutral";
+
+  // 🔥 MAP DATA
+  const coin = {
+    label: selectedCoin,
+    symbol: selectedCoin,
+    emoji:
+      selectedCoin === "DOGE" ? "🐶" : selectedCoin === "PEPE" ? "🐸" : "🚀",
+
+    price: "--",
+    change: `${(data.growth * 100).toFixed(1)}%`,
+
+    sentiment: (((data.sentiment + 1) / 2) * 100).toFixed(1),
+    hype: data.hype_score.toFixed(2),
+    pumpProb: (data.pump_probability * 100).toFixed(1),
+
+    trend: trend,
+
+    alerts: [
+      { msg: data.explanation, type: trend }, // ✅ use normalized trend
+      { msg: `${data.posts_analysed} posts analysed`, type: "neutral" },
+    ],
+
+    explanation: data.explanation,
+
+    sentimentData,
+    mentionData,
+    priceHistory,
+
+    marketCap: "Derived",
+    volume24h: "Derived",
+  };
+
+  const cfg = TREND_CONFIG[coin.trend] || TREND_CONFIG["neutral"];
 
   return (
     <div key={renderKey} className="flex flex-col gap-5">
-
       {/* ── Page header ───────────────────────────────────────────── */}
       <div
         className="rounded-2xl border border-white/[0.08] px-5 py-4 flex items-center justify-between flex-wrap gap-4 animate-fade-in"
         style={{
-          background:        `linear-gradient(135deg, ${cfg.colorDim} 0%, rgba(255,255,255,0.02) 100%)`,
-          backdropFilter:    'blur(20px)',
-          borderColor:       cfg.colorBorder,
-          boxShadow:         `0 0 40px ${cfg.colorGlow}`,
+          background: `linear-gradient(135deg, ${cfg.colorDim} 0%, rgba(255,255,255,0.02) 100%)`,
+          backdropFilter: "blur(20px)",
+          borderColor: cfg.colorBorder,
+          boxShadow: `0 0 40px ${cfg.colorGlow}`,
         }}
       >
         <div className="flex items-center gap-3">
@@ -39,12 +112,18 @@ export default function Dashboard({ selectedCoin }) {
               </h2>
               <span
                 className="text-[11px] px-2.5 py-0.5 rounded-full border font-bold tracking-wide"
-                style={{ color: cfg.color, borderColor: cfg.colorBorder, background: cfg.colorDim }}
+                style={{
+                  color: cfg.color,
+                  borderColor: cfg.colorBorder,
+                  background: cfg.colorDim,
+                }}
               >
                 {coin.symbol}
               </span>
             </div>
-            <p className="text-[11px] text-white/35 mt-1">Real-time trend prediction dashboard</p>
+            <p className="text-[11px] text-white/35 mt-1">
+              Real-time trend prediction dashboard
+            </p>
           </div>
         </div>
 
@@ -116,5 +195,5 @@ export default function Dashboard({ selectedCoin }) {
         <ExplanationBox text={coin.explanation} trend={coin.trend} />
       </div>
     </div>
-  )
+  );
 }

@@ -15,28 +15,27 @@ class CoinMock(TypedDict):
 
 MOCK_DATA: dict[str, CoinMock] = {
     "DOGE": {
-        "posts": [
-            "DOGE is performing exceptionally well and I am very optimistic about its future",
-            "I am extremely happy with my DOGE investment, the returns have been wonderful",
-            "DOGE has a fantastic and supportive community, this coin is truly outstanding",
-            "The price of DOGE is rising strongly and the outlook is very positive",
-            "DOGE is showing great strength and I am confident it will continue to grow",
-            "The DOGE ecosystem is expanding rapidly and the future looks very bright",
-            "I am very excited about DOGE, the momentum is strong and consistently positive",
-            "DOGE continues to deliver strong results and investor confidence is very high",
-        ],
+    "posts": [
+        "DOGE is performing well but I am unsure if it can sustain this growth",
+        "I made good profits on DOGE but it feels a bit overhyped now",
+        "DOGE community is strong but the fundamentals are still questionable",
+        "The price is rising but corrections could happen soon",
+        "DOGE has momentum but I would be cautious entering now",
+        "Some investors are very optimistic but others are warning of a dump",
+        "DOGE is trending but volatility is high",
+        "Mixed opinions on DOGE right now, not entirely bullish"
+    ],
         "current_mentions": 52000,
         "previous_mentions": 29000,
     },
     "PEPE": {
         "posts": [
-            "PEPE is an excellent coin with incredible growth potential and a great community",
-            "I am very pleased with my PEPE investment, the gains have been outstanding",
-            "PEPE just broke a major resistance level which is a very positive sign",
-            "The PEPE community is strong and enthusiastic, this coin has a bright future",
-            "PEPE is trending strongly and I believe it will continue to rise significantly",
-            "I am confident in PEPE, the project is solid and the outlook is very good",
-            "PEPE has delivered amazing returns and I am very happy with its performance",
+            "PEPE is pumping but I think it might be short lived",
+            "Huge hype around PEPE but feels risky",
+            "Some traders are bullish but many are skeptical",
+            "PEPE could rise more but also crash quickly",
+            "Not sure if PEPE has long term value",
+            "PEPE is trending but sentiment is mixed",
         ],
         "current_mentions": 38000,
         "previous_mentions": 15000,

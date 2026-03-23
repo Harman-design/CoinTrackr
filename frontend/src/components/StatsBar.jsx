@@ -1,3 +1,4 @@
+//frontend/src/components/StatsBar.jsx
 import { TREND_CONFIG } from '../data/coins'
 
 function StatPill({ label, value, color }) {
