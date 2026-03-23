@@ -1,13 +1,16 @@
 """
 app/routes/coins.py
-Coin listing and analysis endpoints.
+Coin listing and full AI analysis endpoints.
+
+GET /coins              – list supported coins
+GET /coins/analyze/{coin} – full pipeline: fetch → sentiment → ML → hype score
 """
 
 import logging
-
 from fastapi import APIRouter, HTTPException
 
 from app.models.schemas import CoinAnalysis, CoinList
+from app.data_sources.aggregator import get_coin_data
 from app.services.sentiment_service import get_sentiment_score
 from app.services.feature_service import (
     mentions_growth,
@@ -15,74 +18,68 @@ from app.services.feature_service import (
     calculate_hype_score,
 )
 from app.services.ml_service import predict_pump
-from app.utils.mock_data import MOCK_COIN_DATA, SUPPORTED_COINS
+from app.utils.mock_data import SUPPORTED_COINS
 from app.utils.signals import get_signal, build_explanation
 
 logger = logging.getLogger(__name__)
-
 router = APIRouter()
 
 
-@router.get("", response_model=CoinList, summary="List supported coins")
+@router.get("", response_model=CoinList)
 def list_coins() -> CoinList:
-    """
-    Returns all meme coins currently supported by the analysis engine.
-    """
+    """Returns all coins supported by the analysis engine."""
     return CoinList(coins=SUPPORTED_COINS)
 
 
-@router.get(
-    "/analyze/{coin}",
-    response_model=CoinAnalysis,
-    summary="Analyse a meme coin for pump potential",
-)
+@router.get("/analyze/{coin}", response_model=CoinAnalysis)
 def analyze_coin(coin: str) -> CoinAnalysis:
     """
-    Full AI-powered analysis pipeline for a single coin.
+    Full analysis pipeline for a single meme coin.
 
     Steps:
-    1. Validate coin is supported.
-    2. Run sentiment analysis on mock posts.
-    3. Calculate mentions growth and engagement score.
-    4. Predict pump probability with the ML model.
-    5. Compute hype score.
-    6. Return structured result with signal and explanation.
+      1. Fetch posts from Twitter + Reddit (fallback to mock)
+      2. Run HuggingFace sentiment analysis
+      3. Calculate mentions growth
+      4. Calculate engagement score
+      5. Predict pump probability (Logistic Regression)
+      6. Calculate hype score
+      7. Return structured JSON with signal + explanation
     """
     coin_upper = coin.upper()
 
-    if coin_upper not in MOCK_COIN_DATA:
+    if coin_upper not in SUPPORTED_COINS:
         raise HTTPException(
             status_code=404,
-            detail=f"Coin '{coin_upper}' is not supported. "
-                   f"Supported coins: {SUPPORTED_COINS}",
+            detail=f"'{coin_upper}' is not supported. Supported: {SUPPORTED_COINS}",
         )
 
-    logger.info("Analysing coin: %s", coin_upper)
-    data = MOCK_COIN_DATA[coin_upper]
+    logger.info("── Analysing %s ──────────────────────────────", coin_upper)
 
-    # --- Step 1: Sentiment ---
-    sentiment = get_sentiment_score(data["posts"])
+    # ── Step 1: Fetch data ────────────────────────────────────────────────────
+    data = get_coin_data(coin_upper)
+    logger.info("%s | source=%s | posts=%d", coin_upper, data.data_source, len(data.posts))
+
+    # ── Step 2: Sentiment ─────────────────────────────────────────────────────
+    sentiment = get_sentiment_score(data.posts)
     logger.info("%s | sentiment=%.4f", coin_upper, sentiment)
 
-    # --- Step 2: Mentions growth ---
-    growth = mentions_growth(data["current_mentions"], data["previous_mentions"])
+    # ── Step 3: Mentions growth ───────────────────────────────────────────────
+    growth = mentions_growth(data.current_mentions, data.previous_mentions)
     logger.info("%s | growth=%.4f", coin_upper, growth)
 
-    # --- Step 3: Engagement ---
-    engagement = engagement_score(data["posts"])
+    # ── Step 4: Engagement ────────────────────────────────────────────────────
+    engagement = engagement_score(data.posts)
     logger.info("%s | engagement=%.4f", coin_upper, engagement)
 
-    # --- Step 4: ML pump probability ---
-    # Normalise sentiment from [-1,1] → [0,1] for the model
-    sentiment_norm = (sentiment + 1.0) / 2.0
-    pump_probability = predict_pump([sentiment_norm, growth, engagement])
+    # ── Step 5: ML pump probability ───────────────────────────────────────────
+    pump_probability = predict_pump(sentiment, growth, engagement)
     logger.info("%s | pump_probability=%.4f", coin_upper, pump_probability)
 
-    # --- Step 5: Hype score ---
+    # ── Step 6: Hype score ────────────────────────────────────────────────────
     hype_score = calculate_hype_score(sentiment, growth, engagement)
     logger.info("%s | hype_score=%.4f", coin_upper, hype_score)
 
-    # --- Step 6: Signal & explanation ---
+    # ── Step 7: Signal + explanation ──────────────────────────────────────────
     signal = get_signal(pump_probability)
     explanation = build_explanation(sentiment, growth, engagement, pump_probability)
 
@@ -95,4 +92,6 @@ def analyze_coin(coin: str) -> CoinAnalysis:
         pump_probability=round(pump_probability, 4),
         signal=signal,
         explanation=explanation,
+        data_source=data.data_source,
+        posts_analysed=len(data.posts),
     )

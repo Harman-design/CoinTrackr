@@ -1,6 +1,6 @@
 """
-CoinX – AI-Powered Meme Coin Trend Detection System
-Main FastAPI application entry point.
+CoinTrakr AI – Meme Coin Trend Detection System
+Entry point: starts FastAPI app and registers all routers.
 """
 
 import logging
@@ -9,36 +9,29 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes import coins, health
 
-# ---------------------------------------------------------------------------
-# Logging setup
-# ---------------------------------------------------------------------------
+# ── Logging ──────────────────────────────────────────────────────────────────
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
 )
 logger = logging.getLogger(__name__)
 
-# ---------------------------------------------------------------------------
-# App factory
-# ---------------------------------------------------------------------------
+# ── App ───────────────────────────────────────────────────────────────────────
 app = FastAPI(
-    title="CoinX API",
-    description="AI-Powered Meme Coin Trend Detection System",
-    version="1.0.0",
+    title="CoinTrakr AI",
+    description="Meme Coin Trend Detection – Twitter + Reddit + ML",
+    version="2.0.0",
 )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Streamlit dev – tighten for production
-    allow_credentials=True,
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# ---------------------------------------------------------------------------
-# Routers
-# ---------------------------------------------------------------------------
+# ── Routers ───────────────────────────────────────────────────────────────────
 app.include_router(health.router, tags=["Health"])
 app.include_router(coins.router, prefix="/coins", tags=["Coins"])
 
-logger.info("CoinX API started successfully.")
+logger.info("CoinTrakr AI started successfully.")

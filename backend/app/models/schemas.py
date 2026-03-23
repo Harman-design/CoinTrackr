@@ -1,9 +1,18 @@
 """
 app/models/schemas.py
-Pydantic models for API request/response shapes.
+Pydantic response schemas for all API endpoints.
 """
 
 from pydantic import BaseModel
+
+
+class HealthCheck(BaseModel):
+    status: str
+    version: str
+
+
+class CoinList(BaseModel):
+    coins: list[str]
 
 
 class CoinAnalysis(BaseModel):
@@ -15,12 +24,5 @@ class CoinAnalysis(BaseModel):
     pump_probability: float
     signal: str
     explanation: str
-
-
-class CoinList(BaseModel):
-    coins: list[str]
-
-
-class HealthCheck(BaseModel):
-    status: str
-    version: str
+    data_source: str          # "twitter+reddit" | "mock" | "twitter" | "reddit"
+    posts_analysed: int

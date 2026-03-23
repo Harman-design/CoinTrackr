@@ -1,33 +1,39 @@
 """
 app/services/sentiment_service.py
-Sentiment analysis using a Hugging Face transformers pipeline.
-
-Model: distilbert-base-uncased-finetuned-sst-2-english
-  – Lightweight, fast, no GPU required.
-  – Outputs POSITIVE / NEGATIVE with a confidence score.
-
-We map that to the [-1, +1] range expected by the rest of the system.
+Sentiment analysis using HuggingFace DistilBERT pipeline.
+Model is loaded once and cached for the process lifetime.
+Cache folder is pinned to <project_root>/cache/
 """
 
 import logging
+import os
 from functools import lru_cache
+from pathlib import Path
 from typing import List
 
 from transformers import pipeline, Pipeline
 
 logger = logging.getLogger(__name__)
 
-# Label → sign multiplier
+# ── Pin HuggingFace cache to project root /cache ──────────────────────────────
+_ROOT = Path(__file__).resolve().parents[3]        # project root (cointrakr/)
+_CACHE_DIR = _ROOT / "cache"
+_CACHE_DIR.mkdir(exist_ok=True)
+
+os.environ["TRANSFORMERS_CACHE"] = str(_CACHE_DIR)
+os.environ["HF_HOME"] = str(_CACHE_DIR)
+
 _LABEL_SIGN = {"POSITIVE": 1.0, "NEGATIVE": -1.0}
 
 
 @lru_cache(maxsize=1)
 def _load_pipeline() -> Pipeline:
-    """Load the sentiment pipeline once and cache it for the process lifetime."""
-    logger.info("Loading sentiment analysis pipeline (first call only)…")
+    """Load sentiment pipeline once and keep in memory."""
+    logger.info("Loading HuggingFace sentiment pipeline (once only)…")
     return pipeline(
         "sentiment-analysis",
         model="distilbert-base-uncased-finetuned-sst-2-english",
+        cache_dir=str(_CACHE_DIR),
         truncation=True,
         max_length=512,
     )
@@ -35,35 +41,33 @@ def _load_pipeline() -> Pipeline:
 
 def get_sentiment_score(texts: List[str]) -> float:
     """
-    Analyse a list of text posts and return an average sentiment score.
+    Analyse a list of post texts and return average sentiment in [-1, +1].
 
     Args:
-        texts: List of social-media post strings.
+        texts: List of tweet / Reddit post strings.
 
     Returns:
-        Average sentiment in [-1, +1].
-        Positive values → bullish sentiment.
-        Negative values → bearish sentiment.
+        Average score: positive = bullish, negative = bearish.
     """
     if not texts:
-        logger.warning("get_sentiment_score called with empty list – returning 0.0")
+        logger.warning("Empty text list passed to sentiment scorer – returning 0.0")
         return 0.0
 
-    sentiment_pipe = _load_pipeline()
+    # Cap at 50 posts to keep inference fast during demo
+    sample = texts[:50]
 
     try:
-        results = sentiment_pipe(texts)
-    except Exception as exc:  # pragma: no cover
+        pipe = _load_pipeline()
+        results = pipe(sample)
+    except Exception as exc:
         logger.error("Sentiment pipeline error: %s", exc)
         return 0.0
 
     scores: List[float] = []
     for result in results:
-        label: str = result["label"].upper()
-        confidence: float = result["score"]
-        sign = _LABEL_SIGN.get(label, 1.0)
-        scores.append(sign * confidence)
+        sign = _LABEL_SIGN.get(result["label"].upper(), 1.0)
+        scores.append(sign * result["score"])
 
-    average = sum(scores) / len(scores)
-    logger.debug("Sentiment scores: %s → average: %.4f", scores, average)
-    return round(average, 4)
+    avg = sum(scores) / len(scores)
+    logger.debug("Sentiment over %d texts → %.4f", len(scores), avg)
+    return round(avg, 4)
