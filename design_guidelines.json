@@ -1,0 +1,115 @@
+{
+  "theme": "dark",
+  "app_archetype": "ARCHETYPE 7: ELECTRIC & NEON",
+  "typography": {
+    "headings": {
+      "font_family": "Unbounded",
+      "fallback": "Chivo",
+      "rules": "Use for all primary page titles, hype scores, and major data callouts. Apply tracking-tight for large headings. DO NOT use Inter or generic sans."
+    },
+    "body": {
+      "font_family": "JetBrains Mono",
+      "fallback": "Space Mono",
+      "rules": "Use for data tables, metrics, percentages, and UI text. Enforces the 'technical' and terminal-like feel of a crypto dashboard."
+    },
+    "labels": {
+      "rules": "Uppercase, tracking-[0.2em], text-xs. Used for overlines, table headers, and tiny alerts."
+    }
+  },
+  "colors": {
+    "background": {
+      "primary": "#050505",
+      "secondary": "#0A0A0E",
+      "rules": "Never use pure #000000 without slight texture. Backgrounds should feel deep and empty."
+    },
+    "surface": {
+      "default": "#111116",
+      "hover": "#1A1A22",
+      "border": "rgba(255, 255, 255, 0.1)"
+    },
+    "accent": {
+      "neon_green": "#00FF66",
+      "hot_pink": "#FF007F",
+      "cyber_yellow": "#FFD700",
+      "rules": "Use neon green for Pump Probability and positive changes. Use hot pink for Dump Risk/Fake Hype alerts. Use cyber yellow for trending/hype highlights. DO NOT use teal (#1B93A4) anywhere."
+    },
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "#8A8A93",
+      "muted": "#55555C"
+    }
+  },
+  "visual_enhancers": {
+    "surfaces": "GRID BORDERS & RETRO-FUTURISM. Expose the skeleton. Dashboards should use border-collapse style layouts with 1px solid borders (border-white/10) separating grid items. No soft drop shadows.",
+    "glow": "Use drop-shadow-[0_0_8px_rgba(0,255,102,0.5)] for high-signal alerts (Pump probability > 80%).",
+    "glassmorphism": "Only for sticky headers/navs: bg-black/60, backdrop-blur-xl, border-b border-white/10."
+  },
+  "components": {
+    "cards": "Go cardless or sharp edges (max 4px radius). Focus on data density. Use 1px subtle borders (border-white/10) with flat backgrounds. Hover states should slightly lighten background and brighten the border.",
+    "buttons": "Sharp pill-shaped or strictly rectangular. Primary actions should use High-Contrast Black text on Neon Accent background.",
+    "badges": "Used for 'Hype Status' or 'Alerts'. Sharp edges, transparent backgrounds with 1px solid neon borders and neon text (e.g., border-[#FF007F] text-[#FF007F]).",
+    "tables": "Dense. Use Shadcn table but override padding (py-2 px-4) for higher density. Align metrics correctly (right-align numbers).",
+    "charts": "Use Chart.js. Lines must be solid neon colors with transparent fills (no thick gradients below the line). Grid lines must be barely visible (white/5)."
+  },
+  "grids_and_layouts": {
+    "dashboard_grid": "MODE B: High Density Grid. grid-cols-1 md:grid-cols-3 lg:grid-cols-4. Tight gaps (gap-4). Every pixel must be utilized.",
+    "spacing": "Generous Spacing Philosophy. Use p-6 or p-8 inside standalone containers. Containers with borders MUST have internal padding."
+  },
+  "motion": {
+    "rules": "Minimalist and precise. Micro-interactions for feedback. Hovering a coin row should gently highlight it (bg-white/5). Alerts should pulse subtly.",
+    "transitions": "Use specific properties: transition: background-color 0.2s ease, border-color 0.2s ease."
+  },
+  "features_design_mapping": {
+    "trending_coins_list": "Use dense data tables with JetBrains Mono. Metrics like +45% should use neon green text with a 10% opacity green background badge.",
+    "hype_score": "Visual indicator using a highly saturated circular progress or progress bar (Chart.js doughnut or raw CSS). Cyber Yellow for high hype.",
+    "sentiment_meter": "Horizontal gauge chart with sharp edges. Red (Dump/Fear) to Green (Pump/Greed) gradient, but constructed with segmented solid blocks, not a smooth gradient (retro-tech look).",
+    "mention_graphs": "Chart.js line charts. The line should glow (use canvas drop shadow or shadow-like effects in Chart.js), no fill under the line.",
+    "alert_system": "Use Sonner toasts with sharp 1px borders. Hot pink border for High Risk/Fake Hype alerts. These should pulse when entering.",
+    "pump_dump_probabilities": "Display as large, mono-spaced typography elements (e.g., '87.4%') rather than just bars, to emphasize the quantitative edge."
+  },
+  "accessibility": {
+    "contrast": "Ensure Normal Text (below 18px) meets minimum 4.5:1 ratio. Text colors MUST be explicitly set on hover.",
+    "testing": "All interactive elements MUST include data-testid (e.g., data-testid='coin-row-pepe', data-testid='alert-dismiss').",
+    "reduced_motion": "Respect prefers-reduced-motion for the pulse animations."
+  },
+  "media": {
+    "icons": "Use Phosphor Icons (dense dashboard style). `yarn add @phosphor-icons/react`.",
+    "images": "Use abstract neon backgrounds sparingly for empty states or the auth/landing page. No generic vectors."
+  },
+  "image_urls": [
+    {
+      "url": "https://images.pexels.com/photos/6203470/pexels-photo-6203470.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Close-up of a neon blue line chart on a grid, symbolizing data trends.",
+      "category": "auth_background, empty_state_dashboard"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1762279389042-9439bfb6c155?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "description": "Abstract neon lines forming a digital landscape",
+      "category": "hero_texture"
+    }
+  ],
+  "3d_and_creative": {
+    "libraries": "Chart.js (per user request) for visualization.",
+    "implementation": "Do not use D3 or Three.js unless required for a specific 'Hype Network' graph. Stick to Chart.js as mandated by the user, customized to look Electric & Neon."
+  },
+  "instructions_to_main_agent": [
+    "DO NOT use Inter or standard sans-serif for headings. Stick to Unbounded and JetBrains Mono.",
+    "DO NOT use Teal (#1B93A4) anywhere. It is forbidden.",
+    "DO NOT apply universal transition (transition: all). Use specific properties.",
+    "DO NOT use complete transparent backgrounds for the sticky header or floating overlays.",
+    "DO NOT center align the app container (.App { text-align: center; } is banned).",
+    "DO NOT make generic centered layouts. Use Mode B High Density grids.",
+    "Implement Chart.js visualizations clearly, stripping out default gray tooltips and replacing them with sharp, dark neon-bordered tooltips."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. In frontend design, this creates what users call the 'AI slop' aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+    "Create depth through layered design elements with z-index hierarchy and 1px sharp borders.",
+    "Every interaction needs micro-animations - hover states, transitions, entrance animations. Static = dead.",
+    "NEVER use AI assistant Emoji characters (\ud83e\udd16\ud83e\udde0\ud83d\udcad\ud83d\udca1\ud83d\udd2e\ud83c\udfaf\ud83d\udcda\ud83c\udfad\ud83c\udfac\ud83c\udfaa\ud83c\udf89\ud83c\udf8a\ud83c\udf81\ud83c\udf80\ud83c\udf82\ud83c\udf70\ud83c\udf88\ud83c\udfa8\ud83c\udfb0\ud83d\udcb0\ud83d\udcb5\ud83d\udcb3\ud83c\udfe6\ud83d\udc8e\ud83e\ude99\ud83d\udcb8\ud83e\udd11\ud83d\udcca\ud83d\udcc8\ud83d\udcc9\ud83d\udcb1\ud83d\udd22\ud83c\udfc6\ud83e\udd47) for icons. Use Phosphor Icons.",
+    "Components MUST use named exports, Pages MUST use default exports.",
+    "All interactive and key informational elements MUST include a data-testid attribute.",
+    "Use sonner for toasts, located in /app/src/components/ui/sonner.tsx."
+  ]
+}
+
