@@ -12,12 +12,12 @@ export function LogoIcon({ size = 30 }) {
       />
       <defs>
         <linearGradient id="logo-circle" x1="0" y1="0" x2="30" y2="30" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#00ff88" />
-          <stop offset="1" stopColor="#00ccff" />
+          <stop stopColor="#00f0ff" />
+          <stop offset="1" stopColor="#0088ff" />
         </linearGradient>
         <linearGradient id="logo-line" x1="8" y1="19" x2="22" y2="8" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#00ff88" />
-          <stop offset="1" stopColor="#00ccff" />
+          <stop stopColor="#00f0ff" />
+          <stop offset="1" stopColor="#0088ff" />
         </linearGradient>
       </defs>
     </svg>

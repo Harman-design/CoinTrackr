@@ -14,8 +14,8 @@ html, body, #root {
 }
 
 body {
-  background-color: #060810;
-  font-family: 'Syne', sans-serif;
+  background-color: #050914;
+  font-family: 'Outfit', sans-serif;
   color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -40,11 +40,11 @@ body {
 /* ── Utility Layer ────────────────────────────────────────── */
 @layer utilities {
   .glass {
-    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+    background: linear-gradient(135deg, rgba(0,240,255,0.03) 0%, rgba(170,0,255,0.03) 100%);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6), inset 0 0 16px rgba(0,240,255,0.08), 0 0 20px rgba(0,240,255,0.15);
   }
 
   .glass-hover {
@@ -58,30 +58,30 @@ body {
   }
 
   .neon-border-green {
-    border-color: rgba(0, 255, 136, 0.35);
-    box-shadow: 0 0 20px rgba(0,255,136,0.12);
+    border-color: rgba(0, 240, 255, 0.35);
+    box-shadow: 0 0 20px rgba(0,240,255,0.12);
   }
 
   .neon-border-red {
-    border-color: rgba(255, 51, 102, 0.35);
-    box-shadow: 0 0 20px rgba(255,51,102,0.12);
+    border-color: rgba(255, 0, 170, 0.35);
+    box-shadow: 0 0 20px rgba(255,0,170,0.12);
   }
 
   .neon-border-yellow {
-    border-color: rgba(255, 215, 0, 0.35);
-    box-shadow: 0 0 20px rgba(255,215,0,0.12);
+    border-color: rgba(170, 0, 255, 0.35);
+    box-shadow: 0 0 20px rgba(170,0,255,0.12);
   }
 
   .font-orbitron {
-    font-family: 'Orbitron', monospace;
+    font-family: 'Space Grotesk', monospace;
   }
 
   .font-syne {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Outfit', sans-serif;
   }
 
   .text-gradient-green {
-    background: linear-gradient(135deg, #00ff88, #00ccff);
+    background: linear-gradient(135deg, #00f0ff, #aa00ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -91,8 +91,8 @@ body {
 /* ── Background Grid ──────────────────────────────────────── */
 .bg-grid {
   background-image:
-    linear-gradient(rgba(0, 255, 136, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 136, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
@@ -110,6 +110,12 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
 }
 
 @keyframes scanline {
@@ -140,9 +146,9 @@ body {
 
 /* Pulse dot */
 @keyframes pulseRing {
-  0%   { transform: scale(0.85); box-shadow: 0 0 0 0 rgba(0,255,136,0.6); }
-  70%  { transform: scale(1);    box-shadow: 0 0 0 8px rgba(0,255,136,0);  }
-  100% { transform: scale(0.85); box-shadow: 0 0 0 0 rgba(0,255,136,0);   }
+  0%   { transform: scale(0.85); box-shadow: 0 0 0 0 rgba(0,240,255,0.6); }
+  70%  { transform: scale(1);    box-shadow: 0 0 0 8px rgba(0,240,255,0);  }
+  100% { transform: scale(0.85); box-shadow: 0 0 0 0 rgba(0,240,255,0);   }
 }
 .pulse-ring {
   animation: pulseRing 2s ease-in-out infinite;

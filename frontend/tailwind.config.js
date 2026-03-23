@@ -7,20 +7,20 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        orbitron: ["'Orbitron'", "monospace"],
-        syne: ["'Syne'", "sans-serif"],
+        orbitron: ["'Space Grotesk'", "monospace"],
+        syne: ["'Outfit'", "sans-serif"],
       },
       colors: {
-        bullish:  "#00ff88",
-        bearish:  "#ff3366",
-        neutral:  "#ffd700",
-        hype:     "#ff9900",
-        accent:   "#00ccff",
-        base:     "#060810",
+        bullish:  "#00f0ff", // Cyber Cyan
+        bearish:  "#ff00aa", // Cyber Magenta 
+        neutral:  "#aa00ff", // Hologram Purple
+        hype:     "#0088ff", // Tech Blue
+        accent:   "#00f0ff", 
+        base:     "#050914", // Deep Navy Void
       },
       boxShadow: {
-        glass: "0 4px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08)",
-        neon:  "0 0 24px rgba(0,255,136,0.35)",
+        glass: "0 4px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08)",
+        neon:  "0 0 24px rgba(0,240,255,0.35)",
       },
       animation: {
         "fade-in-up": "fadeInUp 0.5s ease forwards",
@@ -33,8 +33,8 @@ export default {
           "100%": { opacity: 1, transform: "translateY(0)" },
         },
         glow: {
-          "0%":   { boxShadow: "0 0 8px rgba(0,255,136,0.3)"  },
-          "100%": { boxShadow: "0 0 24px rgba(0,255,136,0.8)" },
+          "0%":   { boxShadow: "0 0 8px rgba(0,240,255,0.3)"  },
+          "100%": { boxShadow: "0 0 24px rgba(0,240,255,0.8)" },
         },
       },
     },

@@ -1,62 +1,94 @@
 import { useEffect, useState } from "react";
 import { fetchCoinData } from "../api/redditApi";
+import { COINS } from "../data/coins";
+import { MetricCard, TrendStatusCard } from "./MetricCard";
+import ChartsSection from "./ChartsSection";
+import AlertsPanel from "./AlertsPanel";
+import ExplanationBox from "./ExplanationBox";
 
 export default function Dashboard({ selectedCoin }) {
-  const [data, setData] = useState(null);
+  const [realTimeData, setRealTimeData] = useState(null);
+  const coinStatic = COINS[selectedCoin] || COINS["DOGE"];
 
   useEffect(() => {
     const loadData = async () => {
       const result = await fetchCoinData(selectedCoin);
-      console.log("FINAL DATA:", result); // 🔥 DEBUG
-      setData(result);
+      console.log("FINAL DATA:", result);
+      setRealTimeData(result);
     };
 
     loadData();
   }, [selectedCoin]);
 
+  // Merge realistic static data with real-time API data if available
+  const sentimentScore = realTimeData ? Math.round(realTimeData.sentiment_score || 0) : coinStatic.sentiment;
+  const hypeScore = realTimeData ? Math.round(realTimeData.hype_score || 0) : coinStatic.hype;
+  const pumpProb = realTimeData ? Math.round(realTimeData.pump_probability || 0) : coinStatic.pumpProb;
+  const trend = realTimeData && realTimeData.signal 
+                ? (realTimeData.signal.includes("BUY") ? "bullish" : realTimeData.signal.includes("SELL") ? "bearish" : "neutral") 
+                : coinStatic.trend;
+
+  // Real-time alerts/risks combination
+  const alerts = realTimeData && realTimeData.signal ? [
+    { type: trend, msg: `LIVE SIGNAL: ${realTimeData.signal} detected via J.A.R.V.I.S sentiment analysis ⚡` },
+    ...coinStatic.alerts
+  ] : coinStatic.alerts;
+
   return (
-    <div className="text-white">
+    <div className="flex flex-col gap-6 animate-fade-in pb-10">
+      
+      {/* Top Metrics Row */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <MetricCard 
+          title="Sentiment Analysis" 
+          value={sentimentScore} 
+          suffix="%" 
+          sub="Live AI Sentiment Score"
+          accentColor="#00f0ff" 
+          icon="🧠" 
+          delay={0} 
+        />
+        <MetricCard 
+          title="Hype Index" 
+          value={hypeScore} 
+          suffix="%" 
+          sub="Social Mention Velocity"
+          accentColor="#aa00ff" 
+          icon="🔥" 
+          delay={100} 
+        />
+        <MetricCard 
+          title="Risk Analysis" 
+          value={pumpProb} 
+          suffix="%" 
+          sub="Real-Time Pump Risk"
+          accentColor="#ff00aa" 
+          icon="⚡" 
+          delay={200} 
+        />
+        <TrendStatusCard trend={trend} delay={300} />
+      </div>
 
-      <h2 className="text-2xl font-bold mb-6">
-        🚀 {selectedCoin} Analysis
-      </h2>
-
-      {data && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
-          <Card title="Sentiment Score" value={`${Math.round(data.sentiment_score)}%`} />
-          <Card title="Hype Score" value={`${Math.round(data.hype_score)}%`} />
-          <Card title="Pump Probability" value={`${Math.round(data.pump_probability)}%`} />
-          <SignalCard signal={data.signal} />
-
+      {/* Main Content Area */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* Left Col: Explanations + Alerts (Real Time Risks) */}
+        <div className="lg:col-span-1 flex flex-col gap-6">
+          <ExplanationBox 
+            text={realTimeData ? `J.A.R.V.I.S Real-Time Uplink Active. The market is currently showing a ${trend} trend. Risk probability is calculated at ${pumpProb}% based on live social streams. ${coinStatic.explanation}` : coinStatic.explanation} 
+            trend={trend} 
+          />
+          <AlertsPanel alerts={alerts} />
         </div>
-      )}
 
-    </div>
-  );
-}
+        {/* Right Col: Charts (Mention Growth, Sentiment, Price) */}
+        <div className="lg:col-span-2">
+          {/* We pass coinStatic to ChartsSection as it contains the history datasets */}
+          <ChartsSection coin={coinStatic} />
+        </div>
 
-function Card({ title, value }) {
-  return (
-    <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
-      <h3 className="text-sm text-white/50">{title}</h3>
-      <p className="text-2xl font-bold">{value}</p>
-    </div>
-  );
-}
+      </div>
 
-function SignalCard({ signal }) {
-  const color =
-    signal.includes("BUY")
-      ? "text-green-400"
-      : signal.includes("SELL")
-      ? "text-red-400"
-      : "text-yellow-400";
-
-  return (
-    <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
-      <h3 className="text-sm text-white/50">Signal</h3>
-      <p className={`text-2xl font-bold ${color}`}>{signal}</p>
     </div>
   );
 }

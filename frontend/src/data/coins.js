@@ -144,35 +144,35 @@ export const COINS = {
 
 export const TREND_CONFIG = {
   bullish: {
-    color:       "#00ff88",
-    colorDim:    "rgba(0,255,136,0.15)",
-    colorBorder: "rgba(0,255,136,0.35)",
-    colorGlow:   "rgba(0,255,136,0.12)",
-    bgClass:     "bg-[#00ff8814]",
-    borderClass: "border-[#00ff8855]",
-    dotClass:    "bg-[#00ff88]",
+    color:       "#00f0ff",
+    colorDim:    "rgba(0,240,255,0.15)",
+    colorBorder: "rgba(0,240,255,0.35)",
+    colorGlow:   "rgba(0,240,255,0.12)",
+    bgClass:     "bg-[#00f0ff14]",
+    borderClass: "border-[#00f0ff55]",
+    dotClass:    "bg-[#00f0ff]",
     label:       "Bullish",
     emoji:       "🟢",
   },
   bearish: {
-    color:       "#ff3366",
-    colorDim:    "rgba(255,51,102,0.15)",
-    colorBorder: "rgba(255,51,102,0.35)",
-    colorGlow:   "rgba(255,51,102,0.12)",
-    bgClass:     "bg-[#ff336614]",
-    borderClass: "border-[#ff336655]",
-    dotClass:    "bg-[#ff3366]",
+    color:       "#ff00aa",
+    colorDim:    "rgba(255,0,170,0.15)",
+    colorBorder: "rgba(255,0,170,0.35)",
+    colorGlow:   "rgba(255,0,170,0.12)",
+    bgClass:     "bg-[#ff00aa14]",
+    borderClass: "border-[#ff00aa55]",
+    dotClass:    "bg-[#ff00aa]",
     label:       "Bearish",
     emoji:       "🔴",
   },
   neutral: {
-    color:       "#ffd700",
-    colorDim:    "rgba(255,215,0,0.15)",
-    colorBorder: "rgba(255,215,0,0.35)",
-    colorGlow:   "rgba(255,215,0,0.12)",
-    bgClass:     "bg-[#ffd70014]",
-    borderClass: "border-[#ffd70055]",
-    dotClass:    "bg-[#ffd700]",
+    color:       "#aa00ff",
+    colorDim:    "rgba(170,0,255,0.15)",
+    colorBorder: "rgba(170,0,255,0.35)",
+    colorGlow:   "rgba(170,0,255,0.12)",
+    bgClass:     "bg-[#aa00ff14]",
+    borderClass: "border-[#aa00ff55]",
+    dotClass:    "bg-[#aa00ff]",
     label:       "Neutral",
     emoji:       "🟡",
   },
@@ -180,27 +180,27 @@ export const TREND_CONFIG = {
 
 // ─── PIE CHART COLORS ──────────────────────────────────────────────────────────
 
-export const PIE_COLORS = ["#00ff88", "#ffd700", "#ff3366"]
+export const PIE_COLORS = ["#00f0ff", "#aa00ff", "#ff00aa"]
 
 // ─── ALERT STYLE MAP ───────────────────────────────────────────────────────────
 
 export const ALERT_STYLE = {
   bullish: {
-    border: "border-[#00ff8855]",
-    bg:     "bg-[#00ff880a]",
-    text:   "text-[#00ff88]",
+    border: "border-[#00f0ff55]",
+    bg:     "bg-[#00f0ff0a]",
+    text:   "text-[#00f0ff]",
     icon:   "🟢",
   },
   bearish: {
-    border: "border-[#ff336655]",
-    bg:     "bg-[#ff33660a]",
-    text:   "text-[#ff3366]",
+    border: "border-[#ff00aa55]",
+    bg:     "bg-[#ff00aa0a]",
+    text:   "text-[#ff00aa]",
     icon:   "🔴",
   },
   neutral: {
-    border: "border-[#ffd70055]",
-    bg:     "bg-[#ffd7000a]",
-    text:   "text-[#ffd700]",
+    border: "border-[#aa00ff55]",
+    bg:     "bg-[#aa00ff0a]",
+    text:   "text-[#aa00ff]",
     icon:   "🟡",
   },
 }

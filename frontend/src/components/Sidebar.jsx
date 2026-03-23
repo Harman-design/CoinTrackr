@@ -13,8 +13,8 @@ export default function Sidebar({ active, setActive, collapsed, setCollapsed }) 
       style={{
         width:            collapsed ? 60 : 196,
         background:       'rgba(255,255,255,0.02)',
-        backdropFilter:   'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        backdropFilter:   'blur(40px)',
+        WebkitBackdropFilter: 'blur(40px)',
       }}
     >
       {/* Collapse toggle */}
@@ -48,7 +48,7 @@ export default function Sidebar({ active, setActive, collapsed, setCollapsed }) 
                 }
               `}
               style={isActive ? {
-                background: 'linear-gradient(135deg, rgba(0,255,136,0.14) 0%, rgba(0,204,255,0.07) 100%)',
+                background: 'linear-gradient(135deg, rgba(0,240,255,0.14) 0%, rgba(0,136,255,0.07) 100%)',
                 boxShadow:  'inset 0 1px 0 rgba(255,255,255,0.08)',
               } : {}}
             >
@@ -56,7 +56,7 @@ export default function Sidebar({ active, setActive, collapsed, setCollapsed }) 
               {isActive && (
                 <span
                   className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full"
-                  style={{ background: 'linear-gradient(180deg, #00ff88, #00ccff)' }}
+                  style={{ background: 'linear-gradient(180deg, #00f0ff, #0088ff)' }}
                 />
               )}
 
@@ -64,7 +64,7 @@ export default function Sidebar({ active, setActive, collapsed, setCollapsed }) 
               {isActive && (
                 <span
                   className="absolute inset-0 opacity-20 rounded-xl pointer-events-none"
-                  style={{ background: 'radial-gradient(ellipse at left center, #00ff88 0%, transparent 70%)' }}
+                  style={{ background: 'radial-gradient(ellipse at left center, #00f0ff 0%, transparent 70%)' }}
                 />
               )}
 
@@ -76,7 +76,7 @@ export default function Sidebar({ active, setActive, collapsed, setCollapsed }) 
 
               {/* Active dot for collapsed */}
               {isActive && collapsed && (
-                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#00ff88]" />
+                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#00f0ff]" />
               )}
             </button>
           )

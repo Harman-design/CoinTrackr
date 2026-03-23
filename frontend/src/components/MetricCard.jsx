@@ -14,11 +14,11 @@ export function MetricCard({ title, value, suffix = '', sub, accentColor, icon, 
 
   return (
     <div
-      className="relative overflow-hidden rounded-2xl border border-white/[0.08] p-5 cursor-default glass-hover"
+      className="relative overflow-hidden rounded-2xl border glass border-[#00f0ff]/20 shadow-neon p-5 cursor-default glass-hover"
       style={{
         background:           'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)',
-        backdropFilter:       'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        backdropFilter:       'blur(40px)',
+        WebkitBackdropFilter: 'blur(40px)',
         boxShadow:            `0 4px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.07)`,
         opacity:              visible ? 1 : 0,
         transform:            visible ? 'translateY(0)' : 'translateY(16px)',
@@ -82,8 +82,8 @@ export function TrendStatusCard({ trend, delay = 0 }) {
       style={{
         borderColor:          cfg.colorBorder,
         background:           `linear-gradient(135deg, ${cfg.colorDim} 0%, rgba(255,255,255,0.02) 100%)`,
-        backdropFilter:       'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        backdropFilter:       'blur(40px)',
+        WebkitBackdropFilter: 'blur(40px)',
         boxShadow:            `0 4px 32px rgba(0,0,0,0.45), 0 0 28px ${cfg.colorGlow}`,
         opacity:              visible ? 1 : 0,
         transform:            visible ? 'translateY(0)' : 'translateY(16px)',

@@ -14,12 +14,12 @@ function ComparisonBar() {
     Pump:      coin.pumpProb,
   }))
 
-  const COLORS = { Sentiment: '#00ccff', Hype: '#ff9900', Pump: '#00ff88' }
+  const COLORS = { Sentiment: '#00f0ff', Hype: '#bc13fe', Pump: '#ffea00' }
 
   return (
     <div
-      className="rounded-2xl border border-white/[0.08] p-5"
-      style={{ background: 'rgba(255,255,255,0.025)', backdropFilter: 'blur(20px)' }}
+      className="rounded-2xl border glass border-[#00f0ff]/20 shadow-neon p-5"
+      style={{ background: 'transparent', backdropFilter: 'blur(40px)' }}
     >
       <h3 className="text-sm font-bold text-white mb-1">Coin Comparison</h3>
       <p className="text-[11px] text-white/35 mb-5">Sentiment · Hype · Pump across all coins</p>
@@ -58,8 +58,8 @@ function CoinRadar({ coin, coinKey }) {
 
   return (
     <div
-      className="rounded-2xl border border-white/[0.08] p-5"
-      style={{ background: 'rgba(255,255,255,0.025)', backdropFilter: 'blur(20px)' }}
+      className="rounded-2xl border glass border-[#00f0ff]/20 shadow-neon p-5"
+      style={{ background: 'transparent', backdropFilter: 'blur(40px)' }}
     >
       <div className="flex items-center gap-2 mb-4">
         <span className="text-xl">{coin.emoji}</span>
@@ -93,8 +93,8 @@ function HypeLeaderboard() {
 
   return (
     <div
-      className="rounded-2xl border border-white/[0.08] p-5"
-      style={{ background: 'rgba(255,255,255,0.025)', backdropFilter: 'blur(20px)' }}
+      className="rounded-2xl border glass border-[#00f0ff]/20 shadow-neon p-5"
+      style={{ background: 'transparent', backdropFilter: 'blur(40px)' }}
     >
       <h3 className="text-sm font-bold text-white mb-1">Hype Leaderboard</h3>
       <p className="text-[11px] text-white/35 mb-5">Ranked by current hype score</p>
@@ -106,7 +106,7 @@ function HypeLeaderboard() {
               <span
                 className="text-sm font-black w-5 shrink-0"
                 style={{
-                  color: i === 0 ? '#ffd700' : i === 1 ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.25)',
+                  color: i === 0 ? '#aa00ff' : i === 1 ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.25)',
                   fontFamily: "'Orbitron', monospace",
                 }}
               >

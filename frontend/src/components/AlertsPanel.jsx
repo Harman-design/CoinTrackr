@@ -12,12 +12,15 @@ function AlertCard({ alert, index }) {
         animate-fade-in-up
       `}
       style={{
-        borderColor:  alert.type === 'bullish' ? 'rgba(0,255,136,0.33)'
-                    : alert.type === 'bearish' ? 'rgba(255,51,102,0.33)'
-                    : 'rgba(255,215,0,0.33)',
-        background:   alert.type === 'bullish' ? 'rgba(0,255,136,0.05)'
-                    : alert.type === 'bearish' ? 'rgba(255,51,102,0.05)'
-                    : 'rgba(255,215,0,0.05)',
+        borderColor:  alert.type === 'bullish' ? 'rgba(0,240,255,0.6)'
+                    : alert.type === 'bearish' ? 'rgba(255,0,170,0.6)'
+                    : 'rgba(170,0,255,0.6)',
+        background:   alert.type === 'bullish' ? 'linear-gradient(90deg, rgba(0,240,255,0.15) 0%, rgba(0,240,255,0.02) 100%)'
+                    : alert.type === 'bearish' ? 'linear-gradient(90deg, rgba(255,0,170,0.15) 0%, rgba(255,0,170,0.02) 100%)'
+                    : 'linear-gradient(90deg, rgba(170,0,255,0.15) 0%, rgba(170,0,255,0.02) 100%)',
+        boxShadow:    alert.type === 'bullish' ? '0 0 15px rgba(0,240,255,0.15), inset 0 0 10px rgba(0,240,255,0.05)'
+                    : alert.type === 'bearish' ? '0 0 15px rgba(255,0,170,0.15), inset 0 0 10px rgba(255,0,170,0.05)'
+                    : '0 0 15px rgba(170,0,255,0.15), inset 0 0 10px rgba(170,0,255,0.05)',
         animationDelay: `${index * 80}ms`,
         animationFillMode: 'both',
       }}
@@ -29,14 +32,14 @@ function AlertCard({ alert, index }) {
           {alert.type}
         </p>
       </div>
-      {/* Right accent bar */}
       <div
-        className="w-[2px] h-full rounded-full shrink-0 self-stretch"
+        className="w-[3px] h-full rounded-full shrink-0 self-stretch shadow-neon"
         style={{
-          background: alert.type === 'bullish' ? '#00ff88'
-                    : alert.type === 'bearish' ? '#ff3366'
-                    : '#ffd700',
-          opacity: 0.6,
+          background: alert.type === 'bullish' ? '#00f0ff'
+                    : alert.type === 'bearish' ? '#ff00aa'
+                    : '#aa00ff',
+          boxShadow: `0 0 10px ${alert.type === 'bullish' ? '#00f0ff' : alert.type === 'bearish' ? '#ff00aa' : '#aa00ff'}`,
+          opacity: 0.9,
         }}
       />
     </div>
@@ -46,11 +49,11 @@ function AlertCard({ alert, index }) {
 export default function AlertsPanel({ alerts }) {
   return (
     <div
-      className="rounded-2xl border border-white/[0.08] p-5 flex flex-col"
+      className="rounded-2xl border glass border-[#00f0ff]/20 shadow-neon p-5 flex flex-col"
       style={{
-        background:           'rgba(255,255,255,0.025)',
-        backdropFilter:       'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        background:           'transparent',
+        backdropFilter:       'blur(40px)',
+        WebkitBackdropFilter: 'blur(40px)',
       }}
     >
       {/* Header */}
@@ -63,12 +66,12 @@ export default function AlertsPanel({ alerts }) {
           <span
             className="flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border"
             style={{
-              color:       '#00ff88',
-              borderColor: 'rgba(0,255,136,0.35)',
-              background:  'rgba(0,255,136,0.08)',
+              color:       '#00f0ff',
+              borderColor: 'rgba(0,240,255,0.35)',
+              background:  'rgba(0,240,255,0.08)',
             }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00ff88] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse" />
             Live
           </span>
         </div>

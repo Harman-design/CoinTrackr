@@ -4,10 +4,10 @@ import { COINS, TREND_CONFIG } from '../data/coins'
 function InsightCard({ emoji, title, body, accentColor, tag, delay = 0 }) {
   return (
     <div
-      className="rounded-2xl border border-white/[0.08] p-5 relative overflow-hidden glass-hover animate-fade-in-up"
+      className="rounded-2xl border glass border-[#00f0ff]/20 shadow-neon p-5 relative overflow-hidden glass-hover animate-fade-in-up"
       style={{
-        background:           'rgba(255,255,255,0.025)',
-        backdropFilter:       'blur(20px)',
+        background:           'transparent',
+        backdropFilter:       'blur(40px)',
         animationDelay:       `${delay}ms`,
         animationFillMode:    'both',
       }}
@@ -52,7 +52,7 @@ function CoinSummaryCard({ coinKey, coin, delay = 0 }) {
       style={{
         borderColor:       cfg.colorBorder,
         background:        `linear-gradient(135deg, ${cfg.colorDim} 0%, rgba(255,255,255,0.02) 100%)`,
-        backdropFilter:    'blur(20px)',
+        backdropFilter:    'blur(40px)',
         boxShadow:         `0 0 32px ${cfg.colorGlow}`,
         animationDelay:    `${delay}ms`,
         animationFillMode: 'both',
@@ -109,37 +109,37 @@ export default function InsightsPage() {
       emoji: '🚀', tag: 'Opportunity',
       title: 'DOGE shows early accumulation pattern',
       body:  'On-chain data indicates long-term holders are accumulating DOGE at current prices. Exchange outflows have increased 22% in the last 48 hours, a historically bullish signal.',
-      accentColor: '#00ff88',
+      accentColor: '#00f0ff',
     },
     {
       emoji: '⚠️', tag: 'Warning',
       title: 'PEPE experiencing social cooldown',
       body:  'Post-hype fatigue is setting in for PEPE. Social mentions have declined 40% from the peak. Historically, meme coins in this phase see further correction before potential recovery.',
-      accentColor: '#ff3366',
+      accentColor: '#ff00aa',
     },
     {
       emoji: '🔥', tag: 'Signal',
       title: 'SHIB burn rate accelerating',
       body:  'The Shiba Inu ecosystem burned 18% more tokens this week compared to last. Sustained burn rate increases often precede price appreciation as circulating supply tightens.',
-      accentColor: '#ffd700',
+      accentColor: '#aa00ff',
     },
     {
       emoji: '🧠', tag: 'AI Prediction',
       title: 'Cross-coin sentiment divergence detected',
       body:  'Our NLP model detects an unusually wide sentiment gap between DOGE (+84) and PEPE (+41). This divergence historically resolves within 5–7 days as capital rotates between meme assets.',
-      accentColor: '#00ccff',
+      accentColor: '#0088ff',
     },
     {
       emoji: '📊', tag: 'Macro',
       title: 'Meme coin sector volume up 34%',
       body:  'Total meme coin trading volume rose 34% week-over-week, outperforming the broader crypto market. Retail interest, measured by Google Trends data, is at a 6-month high.',
-      accentColor: '#ff9900',
+      accentColor: '#0088ff',
     },
     {
       emoji: '🔗', tag: 'On-Chain',
       title: 'Whale wallets quietly accumulating DOGE',
       body:  'Three wallets holding over 10M DOGE each have increased their positions in the last 72 hours. This type of quiet accumulation by large holders often precedes retail FOMO.',
-      accentColor: '#00ff88',
+      accentColor: '#00f0ff',
     },
   ]
 

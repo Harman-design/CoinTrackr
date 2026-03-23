@@ -9,8 +9,8 @@ export default function ExplanationBox({ text, trend }) {
       style={{
         borderColor:          cfg.colorBorder,
         background:           `linear-gradient(135deg, ${cfg.colorDim} 0%, rgba(255,255,255,0.02) 100%)`,
-        backdropFilter:       'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        backdropFilter:       'blur(40px)',
+        WebkitBackdropFilter: 'blur(40px)',
         boxShadow:            `0 0 40px ${cfg.colorGlow}`,
       }}
     >

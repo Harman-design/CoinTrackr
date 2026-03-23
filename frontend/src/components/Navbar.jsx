@@ -5,7 +5,7 @@ export default function Navbar() {
     <header
       className="flex items-center justify-between px-5 py-3 border-b border-white/10 shrink-0 z-50"
       style={{
-        background:       'rgba(6,8,16,0.85)',
+        background:       'rgba(5,9,20,0.85)',
         backdropFilter:   'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
       }}
@@ -30,20 +30,20 @@ export default function Navbar() {
       <div className="flex items-center gap-2">
         {/* Live badge */}
         <div className="hidden sm:flex items-center gap-2 text-xs text-white/50 bg-white/[0.04] border border-white/10 px-3 py-1.5 rounded-full">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#00ff88] animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse" />
           Live
         </div>
 
         {/* Bell */}
         <button className="w-8 h-8 rounded-xl flex items-center justify-center text-white/40 hover:text-white/70 hover:bg-white/[0.06] transition-all duration-200 relative">
           <BellIcon />
-          <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#ff3366]" />
+          <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#ff00aa]" />
         </button>
 
         {/* Avatar */}
         <div
           className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold text-black shrink-0"
-          style={{ background: 'linear-gradient(135deg, #00ff88, #00ccff)' }}
+          style={{ background: 'linear-gradient(135deg, #00f0ff, #0088ff)' }}
         >
           CT
         </div>

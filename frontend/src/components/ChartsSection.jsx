@@ -13,11 +13,11 @@ function MentionChart({ coin }) {
 
   return (
     <div
-      className="rounded-2xl border border-white/[0.08] p-5"
+      className="rounded-2xl border glass border-[#00f0ff]/20 shadow-neon p-5"
       style={{
-        background:           'rgba(255,255,255,0.025)',
-        backdropFilter:       'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        background:           'transparent',
+        backdropFilter:       'blur(40px)',
+        WebkitBackdropFilter: 'blur(40px)',
       }}
     >
       <div className="flex items-start justify-between mb-5">
@@ -82,11 +82,11 @@ function MentionChart({ coin }) {
 function SentimentChart({ coin }) {
   return (
     <div
-      className="rounded-2xl border border-white/[0.08] p-5"
+      className="rounded-2xl border glass border-[#00f0ff]/20 shadow-neon p-5"
       style={{
-        background:           'rgba(255,255,255,0.025)',
-        backdropFilter:       'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        background:           'transparent',
+        backdropFilter:       'blur(40px)',
+        WebkitBackdropFilter: 'blur(40px)',
       }}
     >
       <div className="mb-5">
@@ -151,11 +151,11 @@ function PriceChart({ coin }) {
 
   return (
     <div
-      className="rounded-2xl border border-white/[0.08] p-5"
+      className="rounded-2xl border glass border-[#00f0ff]/20 shadow-neon p-5"
       style={{
-        background:           'rgba(255,255,255,0.025)',
-        backdropFilter:       'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        background:           'transparent',
+        backdropFilter:       'blur(40px)',
+        WebkitBackdropFilter: 'blur(40px)',
       }}
     >
       <div className="flex items-start justify-between mb-5">
@@ -176,7 +176,7 @@ function PriceChart({ coin }) {
           <defs>
             <linearGradient id={`priceGrad-${coin.symbol}`} x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%"   stopColor={cfg.color} stopOpacity={0.4} />
-              <stop offset="100%" stopColor="#00ccff"   stopOpacity={1}   />
+              <stop offset="100%" stopColor="#0088ff"   stopOpacity={1}   />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
