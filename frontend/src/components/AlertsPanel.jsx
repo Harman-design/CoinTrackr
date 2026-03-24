@@ -3,44 +3,46 @@ import { ALERT_STYLE } from '../data/coins'
 
 function AlertCard({ alert, index }) {
   const style = ALERT_STYLE[alert.type] || ALERT_STYLE["neutral"];
+  const isBullish = alert.type === 'bullish';
+  const isBearish = alert.type === 'bearish';
+  const accentHex = isBullish ? '#00f0ff' : isBearish ? '#ff00aa' : '#aa00ff';
 
   return (
     <div
-      className={`
-        flex items-start gap-3 rounded-xl border px-4 py-3
-        transition-all duration-200 hover:brightness-110 hover:scale-[1.01]
-        animate-fade-in-up
-      `}
+      className="group flex items-center gap-4 rounded-xl border px-5 py-4 transition-all duration-300 hover:scale-[1.02] animate-fade-in-up relative overflow-hidden"
       style={{
-        borderColor:  alert.type === 'bullish' ? 'rgba(0,240,255,0.6)'
-                    : alert.type === 'bearish' ? 'rgba(255,0,170,0.6)'
-                    : 'rgba(170,0,255,0.6)',
-        background:   alert.type === 'bullish' ? 'linear-gradient(90deg, rgba(0,240,255,0.15) 0%, rgba(0,240,255,0.02) 100%)'
-                    : alert.type === 'bearish' ? 'linear-gradient(90deg, rgba(255,0,170,0.15) 0%, rgba(255,0,170,0.02) 100%)'
-                    : 'linear-gradient(90deg, rgba(170,0,255,0.15) 0%, rgba(170,0,255,0.02) 100%)',
-        boxShadow:    alert.type === 'bullish' ? '0 0 15px rgba(0,240,255,0.15), inset 0 0 10px rgba(0,240,255,0.05)'
-                    : alert.type === 'bearish' ? '0 0 15px rgba(255,0,170,0.15), inset 0 0 10px rgba(255,0,170,0.05)'
-                    : '0 0 15px rgba(170,0,255,0.15), inset 0 0 10px rgba(170,0,255,0.05)',
+        borderColor:  `${accentHex}50`,
+        background:   `linear-gradient(135deg, ${accentHex}10 0%, transparent 100%)`,
+        boxShadow:    `0 0 15px ${accentHex}15, inset 0 0 10px ${accentHex}05`,
         animationDelay: `${index * 80}ms`,
         animationFillMode: 'both',
       }}
     >
-      <span className="text-sm mt-0.5 shrink-0">{style.icon}</span>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm text-white/80 leading-snug">{alert.msg}</p>
-        <p className="text-[10px] text-white/30 mt-1 uppercase tracking-wider font-semibold">
-          {alert.type}
-        </p>
+      {/* Hover glow line underneath */}
+      <div 
+        className="absolute bottom-0 left-0 w-full h-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: `linear-gradient(90deg, transparent, ${accentHex}, transparent)` }} 
+      />
+
+      <div 
+        className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-[0_0_10px_currentColor] border"
+        style={{ color: accentHex, background: `${accentHex}15`, borderColor: `${accentHex}40` }}
+      >
+        <span className="text-sm drop-shadow-[0_0_5px_currentColor] h-full w-full flex items-center mt-[-1px] ml-[-1px] justify-center">{style.icon}</span>
       </div>
+      
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-3 mb-1">
+          <p className="text-[9px] font-orbitron text-white/40 tracking-widest uppercase font-bold">
+            SIGNAL: {alert.type}
+          </p>
+        </div>
+        <p className="text-sm font-syne text-white text-shadow-sm font-semibold">{alert.msg}</p>
+      </div>
+
       <div
-        className="w-[3px] h-full rounded-full shrink-0 self-stretch shadow-neon"
-        style={{
-          background: alert.type === 'bullish' ? '#00f0ff'
-                    : alert.type === 'bearish' ? '#ff00aa'
-                    : '#aa00ff',
-          boxShadow: `0 0 10px ${alert.type === 'bullish' ? '#00f0ff' : alert.type === 'bearish' ? '#ff00aa' : '#aa00ff'}`,
-          opacity: 0.9,
-        }}
+        className="w-1 h-8 rounded-full shrink-0 shadow-[0_0_10px_currentColor] opacity-70 group-hover:opacity-100 transition-opacity"
+        style={{ background: accentHex, color: accentHex }}
       />
     </div>
   )
@@ -49,7 +51,7 @@ function AlertCard({ alert, index }) {
 export default function AlertsPanel({ alerts }) {
   return (
     <div
-      className="rounded-2xl border glass border-[#00f0ff]/20 shadow-neon p-5 flex flex-col"
+      className="rounded-2xl border glass border-[#00f0ff]/20 shadow-neon p-6 flex flex-col hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] transition-shadow duration-500"
       style={{
         background:           'transparent',
         backdropFilter:       'blur(40px)',
@@ -57,28 +59,28 @@ export default function AlertsPanel({ alerts }) {
       }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-6 border-b border-white/5 pb-3">
         <div>
-          <h3 className="text-sm font-bold text-white tracking-wide">Live Alerts</h3>
-          <p className="text-[11px] text-white/35 mt-0.5">Real-time signal updates</p>
+          <h3 className="text-sm font-bold text-white tracking-widest font-orbitron uppercase">System Alerts</h3>
+          <p className="text-[9px] font-orbitron tracking-widest text-[#00f0ff] uppercase mt-1 opacity-80">Real-time macro signal streams</p>
         </div>
         <div className="flex items-center gap-2">
           <span
-            className="flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border"
+            className="flex items-center gap-2 text-[10px] font-black tracking-widest uppercase px-3 py-1.5 rounded border shadow-[0_0_10px_currentColor]"
             style={{
               color:       '#00f0ff',
-              borderColor: 'rgba(0,240,255,0.35)',
-              background:  'rgba(0,240,255,0.08)',
+              borderColor: 'rgba(0,240,255,0.3)',
+              background:  'rgba(0,240,255,0.05)',
             }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse shadow-[0_0_5px_#00f0ff]" />
             Live
           </span>
         </div>
       </div>
 
       {/* Alert cards */}
-      <div className="flex flex-col gap-2.5">
+      <div className="flex flex-col gap-3">
         {alerts.map((alert, i) => (
           <AlertCard key={i} alert={alert} index={i} />
         ))}

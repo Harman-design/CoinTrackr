@@ -6,6 +6,8 @@ import { MetricCard, TrendStatusCard } from "./MetricCard";
 import ChartsSection from "./ChartsSection";
 import AlertsPanel from "./AlertsPanel";
 import ExplanationBox from "./ExplanationBox";
+import CoinListTable from "./CoinListTable";
+import GlobalTicker from "./GlobalTicker";
 
 export default function Dashboard({ selectedCoin }) {
   const [realTimeData, setRealTimeData] = useState(null);
@@ -62,6 +64,9 @@ export default function Dashboard({ selectedCoin }) {
 
   return (
     <div className="flex flex-col gap-6 animate-fade-in pb-10">
+      
+      {/* Ticker at the top */}
+      <GlobalTicker />
 
       {/* Top Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -119,6 +124,9 @@ export default function Dashboard({ selectedCoin }) {
         </div>
 
       </div>
+
+      {/* Vast Data Table */}
+      <CoinListTable />
     </div>
   );
 }

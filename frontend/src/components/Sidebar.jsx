@@ -1,9 +1,10 @@
-import { DashboardIcon, TrendsIcon, InsightsIcon, ChevronLeftIcon, ChevronRightIcon } from '../icons'
+import { DashboardIcon, TrendsIcon, InsightsIcon, DetectorIcon, ChevronLeftIcon, ChevronRightIcon } from '../icons'
 
 const NAV_ITEMS = [
   { id: 'dashboard', label: 'Dashboard', Icon: DashboardIcon },
   { id: 'trends',    label: 'Trends',    Icon: TrendsIcon    },
   { id: 'insights',  label: 'Insights',  Icon: InsightsIcon  },
+  { id: 'detector',  label: 'Detector',  Icon: DetectorIcon  },
 ]
 
 export default function Sidebar({ active, setActive, collapsed, setCollapsed }) {

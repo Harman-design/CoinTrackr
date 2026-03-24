@@ -5,6 +5,7 @@ import CoinSelector from './components/CoinSelector'
 import Dashboard    from './components/Dashboard'
 import TrendsPage   from './components/TrendsPage'
 import InsightsPage from './components/InsightsPage'
+import DetectorPage from './components/DetectorPage'
 import AuthPage     from './components/AuthPage'
 import LunaticCrash from './components/LunaticCrash'
 import { ClockIcon  } from './icons'
@@ -54,12 +55,13 @@ function SplashScreen() {
 }
 
 // ─── MOBILE NAV BAR (bottom) ──────────────────────────────────────────────────
-import { DashboardIcon, TrendsIcon, InsightsIcon } from './icons'
+import { DashboardIcon, TrendsIcon, InsightsIcon, DetectorIcon } from './icons'
 
 const MOBILE_NAV = [
   { id: 'dashboard', label: 'Dashboard', Icon: DashboardIcon },
   { id: 'trends',    label: 'Trends',    Icon: TrendsIcon    },
   { id: 'insights',  label: 'Insights',  Icon: InsightsIcon  },
+  { id: 'detector',  label: 'Detector',  Icon: DetectorIcon  },
 ]
 
 function MobileBottomNav({ active, setActive }) {
@@ -135,9 +137,13 @@ export default function App() {
     <div className="relative flex flex-col h-screen overflow-hidden bg-base">
 
       {/* Ambient background */}
-      <div className="fixed inset-0 bg-grid pointer-events-none" />
+      <div className="fixed inset-0 bg-grid pointer-events-none z-0" />
+      <div className="fixed inset-0 pointer-events-none z-[1] overflow-hidden">
+        <div className="w-full h-1 bg-[#00f0ff]/10 shadow-[0_0_8px_#00f0ff88] animate-scanline" />
+      </div>
+
       <div
-        className="fixed top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none"
+        className="fixed top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none z-0"
         style={{ background: 'radial-gradient(circle, rgba(0,240,255,0.08) 0%, transparent 70%)' }}
       />
       <div
@@ -184,6 +190,7 @@ export default function App() {
             )}
             {activeNav === 'trends' && <TrendsPage />}
             {activeNav === 'insights' && <InsightsPage />}
+            {activeNav === 'detector' && <DetectorPage />}
 
           </div>
         </main>

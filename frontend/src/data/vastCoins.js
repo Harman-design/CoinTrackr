@@ -1,0 +1,22 @@
+export const VAST_COINS = [
+  { symbol: "DOGE", name: "Dogecoin", emoji: "🐶", price: 0.1842, change1h: 1.2, change24h: 12.4, change7d: 25.1, volume: "3.4B", marketCap: "26.1B", sentiment: 84, hype: 91, trend: "bullish" },
+  { symbol: "PEPE", name: "Pepe", emoji: "🐸", price: 0.0000091, change1h: -0.5, change24h: -8.7, change7d: -15.2, volume: "842M", marketCap: "3.8B", sentiment: 41, hype: 38, trend: "bearish" },
+  { symbol: "SHIB", name: "Shiba Inu", emoji: "🐕", price: 0.000023, change1h: 0.1, change24h: 1.2, change7d: 5.4, volume: "1.1B", marketCap: "13.8B", sentiment: 67, hype: 61, trend: "neutral" },
+  { symbol: "WIF", name: "Dogwifhat", emoji: "🎩", price: 2.85, change1h: 3.4, change24h: 45.2, change7d: 120.5, volume: "1.2B", marketCap: "2.8B", sentiment: 92, hype: 95, trend: "bullish" },
+  { symbol: "BONK", name: "Bonk", emoji: "🏏", price: 0.000024, change1h: 0.8, change24h: 15.6, change7d: 40.2, volume: "450M", marketCap: "1.5B", sentiment: 78, hype: 82, trend: "bullish" },
+  { symbol: "FLOKI", name: "Floki", emoji: "🪓", price: 0.00021, change1h: -1.2, change24h: -5.4, change7d: 12.1, volume: "320M", marketCap: "2.0B", sentiment: 55, hype: 60, trend: "neutral" },
+  { symbol: "BRETT", name: "Brett", emoji: "🧢", price: 0.08, change1h: 5.1, change24h: 88.5, change7d: 210.4, volume: "210M", marketCap: "800M", sentiment: 95, hype: 98, trend: "bullish" },
+  { symbol: "POPCAT", name: "Popcat", emoji: "🐱", price: 0.45, change1h: -0.5, change24h: 12.4, change7d: 34.5, volume: "150M", marketCap: "450M", sentiment: 80, hype: 75, trend: "bullish" },
+  { symbol: "MOG", name: "Mog Coin", emoji: "😹", price: 0.0000005, change1h: 2.1, change24h: 35.6, change7d: 80.2, volume: "80M", marketCap: "200M", sentiment: 85, hype: 88, trend: "bullish" },
+  { symbol: "BOME", name: "Book of Meme", emoji: "📖", price: 0.012, change1h: -2.3, change24h: -18.5, change7d: 5.6, volume: "250M", marketCap: "650M", sentiment: 35, hype: 42, trend: "bearish" },
+  { symbol: "MEW", name: "Cat in a dogs world", emoji: "🐈", price: 0.005, change1h: 1.5, change24h: 22.4, change7d: 45.8, volume: "180M", marketCap: "400M", sentiment: 72, hype: 68, trend: "bullish" },
+  { symbol: "MYRO", name: "Myro", emoji: "🐶", price: 0.22, change1h: -0.8, change24h: -4.2, change7d: -12.5, volume: "45M", marketCap: "210M", sentiment: 45, hype: 50, trend: "bearish" },
+  { symbol: "SLERF", name: "Slerf", emoji: "🦥", price: 0.35, change1h: 4.2, change24h: 55.6, change7d: 15.2, volume: "300M", marketCap: "175M", sentiment: 88, hype: 92, trend: "bullish" },
+  { symbol: "WEN", name: "Wen", emoji: "📜", price: 0.0002, change1h: 0.2, change24h: 5.4, change7d: 18.2, volume: "60M", marketCap: "140M", sentiment: 65, hype: 55, trend: "neutral" },
+  { symbol: "SNEK", name: "Snek", emoji: "🐍", price: 0.0015, change1h: -1.5, change24h: -8.4, change7d: -2.1, volume: "15M", marketCap: "105M", sentiment: 42, hype: 38, trend: "bearish" },
+  { symbol: "COQ", name: "Coq Inu", emoji: "🐓", price: 0.000002, change1h: 1.1, change24h: 14.5, change7d: 28.6, volume: "25M", marketCap: "135M", sentiment: 70, hype: 65, trend: "bullish" },
+  { symbol: "TOSHI", name: "Toshi", emoji: "🐱", price: 0.0005, change1h: 0.5, change24h: 8.2, change7d: 42.1, volume: "12M", marketCap: "190M", sentiment: 75, hype: 60, trend: "bullish" },
+  { symbol: "SPONGE", name: "Sponge", emoji: "🧽", price: 0.002, change1h: -2.4, change24h: -15.6, change7d: -30.4, volume: "8M", marketCap: "80M", sentiment: 25, hype: 30, trend: "bearish" },
+  { symbol: "BOBO", name: "Bobo", emoji: "🐻", price: 0.0000008, change1h: 3.5, change24h: 42.1, change7d: 95.4, volume: "20M", marketCap: "45M", sentiment: 82, hype: 85, trend: "bullish" },
+  { symbol: "PENG", name: "Peng", emoji: "🐧", price: 0.55, change1h: -1.2, change24h: -6.5, change7d: 15.8, volume: "35M", marketCap: "55M", sentiment: 58, hype: 48, trend: "neutral" }
+];
